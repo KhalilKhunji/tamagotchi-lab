@@ -40,8 +40,8 @@ const render = () => {
 
     if (gameOver === true) {
         clearInterval(timer);
-        gameMessageEl.classList.toggle('hidden');
-        resetBtnEl.classList.toggle('hidden');
+        gameMessageEl.classList.remove('hidden');
+        resetBtnEl.classList.remove('hidden');
     };
 };
 
@@ -57,7 +57,27 @@ const runGame = () => {
     render();
 };
 
+const playBtnClick = () => {
+    state.boredom = 0;
+    render();
+};
+
+const feedBtnClick = () => {
+    state.hunger = 0;
+    render();
+};
+
+const sleepBtnClick = () => {
+    state.sleepiness = 0;
+    render();
+};
+
 const init = () => {
+    gameMessageEl.classList.add('hidden');
+    resetBtnEl.classList.add('hidden');
+    state.boredom = 0;
+    state.hunger = 0;
+    state.sleepiness = 0;
     gameOver = false;
     timer = setInterval(runGame, 2000);
     render();
@@ -65,7 +85,10 @@ const init = () => {
 
 
 /*----------------------------- Event Listeners -----------------------------*/
+playBtnEl.addEventListener('click', playBtnClick);
+feedBtnEl.addEventListener('click', feedBtnClick);
+sleepBtnEl.addEventListener('click', sleepBtnClick);
 
-
+resetBtnEl.addEventListener('click', init);
 
 window.onload = init();
